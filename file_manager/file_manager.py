@@ -2,7 +2,7 @@ import csv
 import gzip
 import json
 import os
-
+import codecs
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -11,7 +11,7 @@ from lxml import etree
 
 
 class FileIO:
-    def __init__(self, file_path, dirname, operator_cls, *args, compression_format=None, buffering=100, mode='r', encoding=None, **kwargs):
+    def __init__(self, file_path, dirname, operator_cls, *args, compression_format=None, buffering=100, mode='r', encoding='utf-8', **kwargs):
         self.file_path = file_path
         self.dirname = dirname
         self.compression_format = compression_format
@@ -27,12 +27,13 @@ class FileIO:
     class Reader:
         def __init__(self, file_handler):
             self.file_handler = file_handler
-
+    
         def read(self):
             while True:
                 line = self.file_handler.readline()
                 if not line:
-                    raise StopIteration
+                    print("End of file reached")
+                    break
                 yield line
 
     class Writer:
@@ -62,7 +63,16 @@ class FileIO:
     def get_operator(self):
         return self.operator_cls(self.file_handler)
 
+    def get_abs_filepath(self):
+        cleaned_filename = ''.join(e for e in self.filename if e.isalnum() or e in {'_', '-', '.'})
+        cleaned_filepath = os.path.join(self.dirname, cleaned_filename)
+        return cleaned_filepath
 
+    def create_dir(path):
+        if not os.path.isdir(path):
+            os.makedirs(path)
+        else:
+            print(f"Directory '{path}' already exists. Files will be overwritten or appended.")    
 class XMLFileIO(FileIO):
 
     def __init__(self, file_path, dirname, operator_cls, split_tag, *args, compression_format=None, mode='r', **kwargs):
@@ -121,7 +131,12 @@ class ParquetFileIO(FileIO):
             self.buffer = []
 
     def open(self):
-        pass
+        if self.mode.startswith('r'):
+            # Use pyarrow.parquet.ParquetFile for reading
+            return pq.ParquetFile(self.file_path, 'r')
+        else:
+            # For writing, use the default open method
+            return open(self.file_path, mode=self.mode, buffering=self.buffering, encoding=self.encoding)
 
     def get_operator(self):
         return self.operator_cls(
@@ -134,17 +149,22 @@ class ParquetFileIO(FileIO):
             self.operator.commit()
 
 
-class CSVFileIO(FileIO):
 
+
+class CSVFileIO(FileIO):
     class Reader:
-        def __init__(self, file_handler):
+        def __init__(self, file_handler, encoding='utf-8'):
             self.file_handler = file_handler
+            self.encoding = encoding
 
         def read(self):
-            reader = csv.DictReader(self.file_handler)
+            # Open the file with the specified encoding
+            with open(self.file_handler.name, 'r', encoding=self.encoding) as csvfile:
+                reader = csv.DictReader(csvfile)
 
-            for row in reader:
-                yield row
+                for row in reader:
+                    yield row
+
 
 
 class JSONFileIO(FileIO):
@@ -152,15 +172,51 @@ class JSONFileIO(FileIO):
     class Reader:
         def __init__(self, file_handler):
             self.file_handler = file_handler
-
+    
         def read(self):
             while True:
                 line = self.file_handler.readline()
                 if not line:
-                    raise StopIteration
+                    print("End of file reached")
+                    break
                 yield json.loads(line)
 
 
+
+
+class ExcelFileIO(FileIO):
+
+    class Reader:
+        def __init__(self, file_handler):
+            self.file_handler = file_handler
+
+        def read(self):
+            # Use pandas to read Excel file
+            df = pd.read_excel(self.file_handler)
+            for _, row in df.iterrows():
+                yield row.to_dict()
+
+    class Writer:
+        def __init__(self, file_handler):
+            self.file_handler = file_handler
+            self.buffer = pd.DataFrame()
+
+        def write(self, data):
+            # Append data to the buffer
+            self.buffer = self.buffer.append(data, ignore_index=True)
+
+        def commit(self):
+            # Write the buffer to the Excel file
+            self.buffer.to_excel(self.file_handler, index=False)
+            self.buffer = pd.DataFrame()
+
+
+
+
+class GzFileIO(FileIO):
+    def open(self):
+        return gzip.open(self.file_path, mode=self.mode, buffering=self.buffering, encoding='latin-1')
+    
 class FileManager:
     BUFFER_SIZE = 50
 
@@ -168,11 +224,12 @@ class FileManager:
         "xml": XMLFileIO,
         "parq": ParquetFileIO,
         "csv": CSVFileIO,
-        "json": JSONFileIO
+        "json": JSONFileIO,
+        "xlsx": ExcelFileIO
     }
 
     SUPPORTED_FILE_COMPRESSION_FORMATS = {
-        "gz": gzip.open
+        "gz": GzFileIO
 
     }
 
@@ -225,6 +282,9 @@ class FileManager:
     def create_dir(path):
         if not os.path.isdir(path):
             os.makedirs(path)
+        else:
+            print(f"Directory '{path}' already exists. Files will be overwritten or appended.")
+
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.file_io_obj.close()
