@@ -1,4 +1,4 @@
-#Documentaton and Testng Link- 
+# Documentaton and Testng Link- 
 
 https://docs.google.com/document/d/1WNZ-ROChD1NpbkMS6eDWjHIeXL7Jd8IumljB-sj3-HQ/edit
 
@@ -14,7 +14,7 @@ gz_zip_reader.py
 
 
 
-#Testing Results:
+# Testing Results:
 Under Testing results, the following open issues in GitHub are resolved-
 
 1.[StopIteration Exception while reading a JSON or Parquet file](https://github.com/deepaknairrpf/file-manager/issues#:~:text=Issues%20list-,StopIteration%20Exception%20while%20reading%20a%20JSON%20or%20Parquet%20file,-%239%20opened%202)
