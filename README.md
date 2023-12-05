@@ -1,4 +1,5 @@
 #Documentaton and Testng Link- 
+
 https://docs.google.com/document/d/1WNZ-ROChD1NpbkMS6eDWjHIeXL7Jd8IumljB-sj3-HQ/edit
 
 Documentation-
@@ -21,11 +22,9 @@ StopIteration Exception while reading a JSON or Parquet file
 This has been handled by adding an exception, which will print ‘End of the file reached’ at EOF.
 Here is the link to the code- https://github.com/ankan-mazumdar/file-manager/blob/Bg-Data/file_manager/file_reader.py
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/b2288d07-f48c-4161-88dd-e62d11eb3075)
 
-
-
-
-
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/4ae3e9f4-5abd-43c4-8334-f797019ed29a)
 
 
 Parquet read file failed due to unknown encoding
