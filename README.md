@@ -1,4 +1,4 @@
-# Documentaton and Testng Link- 
+# Documentaton and Testing Doc Link- 
 
 https://docs.google.com/document/d/1WNZ-ROChD1NpbkMS6eDWjHIeXL7Jd8IumljB-sj3-HQ/edit
 
