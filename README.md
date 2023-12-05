@@ -62,6 +62,7 @@ Below is the testing result-
 https://github.com/ankan-mazumdar/file-manager/blob/Bg-Data/file_manager/file_converter.py
 
 Testing results- 
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/159386f7-efab-4f34-ab59-56f69a4a7b7b)
 
 
@@ -102,6 +103,7 @@ Csv file -
 
 
 Json file-
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/55f26352-0cc6-42f1-a341-0226860b6b59)
 
 
@@ -113,15 +115,18 @@ Parquet file reading-
 
 
 Xlsx file-
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/e47d1f41-71e4-458f-959a-be7976147c98)
 
 
 Compressed file-
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/a8e0b417-9d71-497f-9399-8240ea2d8930)
 
 
 8. Using Spark-submit command-
 Issue -Spark-submit to run Python script gets stuck and never proceeds when there is user interaction/inputs are required at run time
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/896346dc-8028-4992-9edb-ef6238063ca3)
 
 
@@ -132,14 +137,17 @@ If we want to make it work we have to skip spark-submit and execute this as a Py
 We could alternatively achieve this by using pyspark or hardcode the filename in the script
 
 9. Read the file using Pyspark
+    
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/70670b2e-c813-4fb4-aaa5-fcce0e71dc02)
 
 
 10. Writing parquet file and zipping it-
+    
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/78038141-7b33-4e57-a04b-b019a055ea0b)
 
 
 The file is created -
+
 ![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/b022d658-ab9f-402f-a794-1259692dadfa)
 
 
