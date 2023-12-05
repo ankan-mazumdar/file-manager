@@ -67,49 +67,62 @@ Testing results-
 
 Csv to Parquet conversion-
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/22cec0cf-4811-41d9-a077-8083b5eeb3f3)
 
 
 
 Json to parquet -
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/832ee093-352e-494e-af71-6790d18218a5)
 
 
 
 Parquet to Json- 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/0d0abb23-9ed9-41ee-b64e-c2086f31ec9a)
 
 
 
-Copy move, create remove operations- As name suggests this script basically can copy , move, make, and remove files from any mentioned path. Here is the code link-
+6. Copy move, create remove operations- As name suggests this script basically can copy , move, make, and remove files from any mentioned path. Here is the code link-
 https://github.com/ankan-mazumdar/file-manager/blob/Bg-Data/file_manager/file_copy_move_rm.py
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/e5281e24-b580-4d1d-ab80-024985c311a7)
+
+
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/9482f013-c2c3-4daf-830b-7d4668bf856a)
 
 
 
 
 
-
-
-Uploaded the scripts over EMR cluster and tested using python and Spark-.
+7. Uploaded the scripts over EMR cluster and tested using python and Spark-.
 Csv file -
+
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/cdc11ef7-3d4c-4cd0-ac88-1506151ee6ee)
 
 
 
 Json file-
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/55f26352-0cc6-42f1-a341-0226860b6b59)
 
 
 
 Parquet file reading-
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/56808579-0177-4ec8-abea-927447fa8621)
+
 
 
 Xlsx file-
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/e47d1f41-71e4-458f-959a-be7976147c98)
 
 
 Compressed file-
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/a8e0b417-9d71-497f-9399-8240ea2d8930)
 
 
 8. Using Spark-submit command-
 Issue -Spark-submit to run Python script gets stuck and never proceeds when there is user interaction/inputs are required at run time
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/896346dc-8028-4992-9edb-ef6238063ca3)
 
 
 https://stackoverflow.com/questions/40910869/python-script-hangs-on-input-method-when-running-spark. 
@@ -119,14 +132,18 @@ If we want to make it work we have to skip spark-submit and execute this as a Py
 We could alternatively achieve this by using pyspark or hardcode the filename in the script
 
 9. Read the file using Pyspark
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/70670b2e-c813-4fb4-aaa5-fcce0e71dc02)
 
 
 10. Writing parquet file and zipping it-
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/78038141-7b33-4e57-a04b-b019a055ea0b)
 
 
 The file is created -
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/b022d658-ab9f-402f-a794-1259692dadfa)
 
 
 
 11.Xlsx file in spark
 
+![image](https://github.com/ankan-mazumdar/file-manager/assets/69012134/6256c7c7-1c52-475e-9cdc-35c83674b0a7)
